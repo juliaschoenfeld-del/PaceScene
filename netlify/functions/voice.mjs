@@ -15,7 +15,19 @@ export default async (request) => {
     const text = cleanText(body?.text);
     if (!text) return Response.json({ error: "Text is required." }, { status: 400 });
 
-    const client = new OpenAI();
+    const apiKey = Netlify.env.get("PACESCENE_OPENAI_API_KEY");
+    if (!apiKey) {
+      return Response.json(
+        { error: "PaceScene Soft needs its speech API connection." },
+        { status: 503, headers: { "Cache-Control": "no-store" } }
+      );
+    }
+
+    const client = new OpenAI({
+      apiKey,
+      baseURL: "https://api.openai.com/v1"
+    });
+
     const speech = await client.audio.speech.create({
       model: Netlify.env.get("OPENAI_TTS_MODEL") || "gpt-4o-mini-tts",
       voice: Netlify.env.get("OPENAI_TTS_VOICE") || "marin",
