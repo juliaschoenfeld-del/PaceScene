@@ -19,6 +19,7 @@ function sanitize(input = {}) {
     distance: clean(input.distance, 120),
     when: clean(input.when, 150),
     course: clean(input.course),
+    sensoryDetails: clean(input.sensoryDetails),
     goal: clean(input.goal),
     target: clean(input.target, 300),
     pace: clean(input.pace, 300),
@@ -72,6 +73,7 @@ DESIGN PRINCIPLES
 Use evidence-informed sport imagery principles:
 - Physical: include realistic body sensations relevant to the athlete's supplied facts.
 - Environment: use only environment details the athlete supplied. Never invent exact weather, venue, people or course features.
+- Sensory texture: use sensoryDetails only when supplied; weave them in subtly so the scene feels inhabited rather than descriptive.
 - Task: rehearse the actual pacing, technique, decisions and controllable actions.
 - Timing: let the sequence feel close to real-time rather than like a motivational montage.
 - Emotion: include nerves, effort, doubt and relief without treating them as failure.
@@ -99,6 +101,17 @@ NON-NEGOTIABLE SAFETY / REALISM
 - Do not say "you are unstoppable."
 - Do not overuse breath cues. One grounding breath sequence at the beginning and brief reset breaths later are enough.
 - Make the narration pleasant to hear aloud: short paragraphs, clean sentences, natural pauses.
+
+HUMAN WRITING STANDARD
+- Write like an excellent human performance psychologist who knows the athlete well, not like an AI meditation script.
+- Build continuity from one moment to the next. Let sensations, thoughts and decisions evolve instead of resetting every paragraph.
+- Use supplied micro-details (sounds, textures, watch cues, breathing, temperature, rhythm) sparingly and naturally. Small details should appear where they matter, not in a sensory checklist.
+- Vary sentence length. Mix a few very short cue lines with fuller observational sentences. Avoid repetitive constructions such as “You notice... You notice... You notice...” or “You feel... You feel...”.
+- Include believable inner dialogue when the athlete supplied a thought trap. Let the thought arrive briefly, then show the response without arguing with it.
+- Use precise endurance language appropriate to the sport, but do not invent facts.
+- Let positive language emerge from execution: “this is familiar”, “you know this response”, “stay with the next useful thing”. Avoid affirmation spam.
+- Do not narrate every breath. Do not over-explain the psychology inside the story. The story should feel lived, not taught.
+- Each phase should contain at least one concrete behavioral detail or moment of decision when the athlete supplied enough information to support it.
 
 TONE
 ${toneGuide(d.tone)}
