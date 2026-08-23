@@ -1,0 +1,16 @@
+/* PaceScene v3.1 — stronger front cover + clearer science guidance */
+.cover-wordmark{gap:0;line-height:.78;margin:18px 0 14px!important}
+.cover-wordmark span{display:block;font-size:clamp(50px,7vw,72px)!important;letter-spacing:-.075em}
+.cover-wordmark small{display:block;margin-top:16px;font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:8px;font-weight:900;letter-spacing:.19em;color:var(--ink-soft)}
+.science-deep{background:linear-gradient(135deg,rgba(143,183,162,.13),rgba(255,255,255,.52));border-color:rgba(75,110,91,.18)}
+.lavender-note{background:linear-gradient(135deg,rgba(188,175,222,.20),rgba(255,255,255,.52));border-color:rgba(132,109,176,.16)}
+.cover-art{min-height:152px}
+.cover-brand{position:absolute;left:8px;bottom:7px;z-index:3;font-family:Georgia,serif;font-size:49px;line-height:.72;letter-spacing:-.07em;color:#fff;text-shadow:0 4px 28px rgba(20,50,35,.14)}
+.cover-brand small{display:block;margin-top:16px;font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:7px;line-height:1;letter-spacing:.17em;font-weight:900;color:#e8f1eb}
+.field label em{font-family:Georgia,serif;font-weight:500}
+.brain-note p{max-width:690px}
+.neuro-inline{margin:0 0 22px;padding:16px 17px;border:1px solid rgba(75,110,91,.16);border-radius:20px;background:rgba(255,255,255,.54);display:flex;gap:12px;align-items:flex-start}
+.neuro-inline>span{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:#e7f1e9;color:#45634f;font-weight:900;flex:none}
+.neuro-inline b{color:#314a3b}.neuro-inline p{margin:0;color:var(--ink-soft);font-size:12px;line-height:1.58}
+.preview-card .mini-pill{background:#486c58;color:#fff;border-color:#486c58}
+.preview-card .preview-kicker{letter-spacing:.14em}
