@@ -1,0 +1,9 @@
+{
+  "name": "pacescene-launch-mvp",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "openai": "latest"
+  }
+}
