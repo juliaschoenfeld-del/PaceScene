@@ -1,14 +1,413 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07100c"><meta name="description" content="Personalized mental rehearsal for endurance athletes."><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><title>PaceScene — Mental rehearsal for endurance athletes</title></head><body><div class="app-shell">
-<header class="topbar"><button class="brand plain" data-screen="home"><span class="brand-mark">P</span><span>PaceScene</span></button><div class="top-actions"><button class="button subtle desktop-only" data-screen="library">My sessions</button><button class="button primary" data-screen="builder">New rehearsal</button></div></header>
-<main>
-<section id="home" class="screen active"><div class="hero"><div class="hero-copy"><div class="pill"><span class="pulse"></span>Mental rehearsal for endurance athletes</div><h1>Make your best performance feel <em>familiar.</em></h1><p class="hero-sub">Rehearse a race, a key workout, or the training block that gets you there — including the pressure, fatigue and doubts you actually expect to face.</p><div class="hero-actions"><button class="button primary large" data-screen="builder">Build my rehearsal →</button><button class="button large" id="demoButton">Try a 10K demo</button></div><p class="fine-print">Visualization and performance reflection for endurance sport. PaceScene does not guarantee outcomes and should complement—not replace—coaching, medical care or psychological support.</p><div class="feature-row"><div><strong>01</strong><span>Describe what matters</span></div><div><strong>02</strong><span>Rehearse the hard part</span></div><div><strong>03</strong><span>Hear yourself execute</span></div></div></div><div class="device-wrap"><div class="device"><div class="device-screen"><div class="device-status"><span>9:41</span><span>● ● ●</span></div><div class="mini-brand"><span class="brand-mark small">P</span>PaceScene</div><div class="phone-kicker">RACE DAY · 10K</div><div class="race-card"><div class="race-card-top"><span class="tag">Your rehearsal</span><span class="duration">5 min</span></div><h3>The moment it gets hard</h3><p>You reach 7 km. The effort bites. Your mind starts negotiating. You exhale, lift your posture, and return to the next 200 metres.</p><div class="waveform"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><button class="round-play" id="heroPlay">▶</button></div><div class="phone-stats"><div><b>6/10</b><span>Before</span></div><div class="arrow">→</div><div><b>8/10</b><span>Ready</span></div></div></div></div></div></div><section class="why"><div class="section-label">THREE KINDS OF MENTAL REP</div><h2>Race day is only one part of endurance performance.</h2><div class="why-grid"><article class="info-card"><span>01</span><h3>Race / event</h3><p>Rehearse pacing, race pressure, the decisive section and your finish.</p></article><article class="info-card"><span>02</span><h3>Key session</h3><p>Rehearse a workout you need to execute well when fatigue or doubt arrives.</p></article><article class="info-card"><span>03</span><h3>Training block</h3><p>Rehearse weeks of consistency, overload, recovery, setbacks and adaptation.</p></article></div></section></section>
-<section id="builder" class="screen"><div class="builder-shell"><div class="builder-head"><div><div class="section-label">CREATE A REHEARSAL</div><h2 id="builderTitle">What are you preparing for?</h2></div><div class="progress-copy"><span id="stepCopy">1 / 5</span></div></div><div class="progress-track"><div id="progressFill"></div></div><div class="builder-card">
-<div class="step active" data-step="1"><h3>Set the scene</h3><p class="lead">PaceScene shapes the rehearsal differently for a race, a session, or a training block.</p><div class="context-choice-grid"><button class="context-choice active" data-context="race"><b>Race / event</b><span>Competition day</span></button><button class="context-choice" data-context="session"><b>Key session</b><span>One important workout</span></button><button class="context-choice" data-context="block"><b>Training block</b><span>Several weeks</span></button></div><div class="two-col"><div class="field"><label>First name <span>(optional)</span></label><input id="name" placeholder="Maya"></div><div class="field"><label>Endurance sport</label><select id="sport"><option>Running</option><option>Trail / Ultra Running</option><option>Road Cycling</option><option>Mountain Biking</option><option>Swimming</option><option>Open Water Swimming</option><option>Triathlon</option><option>Duathlon</option><option>Rowing</option><option>Cross-country Skiing</option><option>HYROX / Hybrid Endurance</option><option>Other endurance sport</option></select></div></div><div class="two-col"><div class="field"><label id="eventLabel">Race / event</label><input id="event" placeholder="City 10K"></div><div class="field"><label id="distanceLabel">Distance</label><input id="distance" placeholder="10 km"></div></div><div class="field"><label id="whenLabel">When is it?</label><input id="when" placeholder="Saturday morning"></div></div>
-<div class="step" data-step="2"><h3 id="goalHeading">The race you want to execute</h3><p class="lead" id="goalLead"></p><div class="field"><label id="goalLabel">What would “really well” look like?</label><textarea id="goal"></textarea></div><div class="two-col"><div class="field"><label id="targetLabel">Target <span>(optional)</span></label><input id="target"></div><div class="field"><label>Pace / power / stroke cue <span>(optional)</span></label><input id="pace"></div></div><div class="field"><label id="courseLabel">What should the scene feel like?</label><textarea id="course"></textarea></div></div>
-<div class="step" data-step="3"><h3>Rehearse the difficult part.</h3><p class="lead">Make your best response to discomfort familiar.</p><div class="field"><label>What are you most worried might happen?</label><textarea id="fear"></textarea></div><div class="field"><label>What happens in your body or thinking?</label><textarea id="pressure"></textarea></div><div class="two-col"><div class="field"><label>Reset cue</label><input id="cue" placeholder="Long exhale. Tall posture. Next 200."></div><div class="field"><label>Physical anchor</label><input id="anchor" placeholder="Loose hands, tall chest"></div></div></div>
-<div class="step" data-step="4"><h3 id="arcHeading">Build the race arc.</h3><p class="lead" id="arcLead"></p><div class="phase-grid" id="phaseGrid"></div></div>
-<div class="step" data-step="5"><h3>Choose the feeling.</h3><div class="choice-grid"><button class="choice active" data-tone="calm"><b>Calm certainty</b><span>Controlled and grounded.</span></button><button class="choice" data-tone="charged"><b>Competitive fire</b><span>Bold and committed.</span></button><button class="choice" data-tone="flow"><b>Flow</b><span>Loose and absorbed.</span></button><button class="choice" data-tone="resilient"><b>Resilient</b><span>Strong around setbacks.</span></button></div><div class="two-col top-gap"><div class="field"><label>Session length</label><select id="length"><option value="primer">2–3 min</option><option value="full" selected>5–6 min</option><option value="deep">8–10 min</option></select></div><div class="field"><label>Narration</label><select id="perspective"><option value="you" selected>Guided · “You…”</option><option value="i">First person · “I…”</option></select></div></div><div class="field"><label>Anything PaceScene must not invent or get wrong? <span>(optional)</span></label><textarea id="lockedFacts"></textarea></div><div class="readiness"><div class="readiness-head"><label>How ready do you feel right now?</label><strong><span id="beforeValue">6</span>/10</strong></div><input type="range" id="beforeReady" min="1" max="10" value="6"></div></div>
-<div class="builder-actions"><button class="button" id="backButton">← Back</button><button class="button primary" id="nextButton">Continue →</button></div></div></div></section>
-<section id="session" class="screen"><div class="session-shell"><div class="session-top"><button class="button subtle" data-screen="builder">← Edit inputs</button><span class="tag" id="typeTag">RACE REHEARSAL</span></div><div class="session-grid"><article class="script-card"><div class="script-head"><div><div class="section-label" id="sessionSport"></div><h2 id="sessionName"></h2><p id="sessionGoal"></p></div><button class="button subtle" id="editButton">Edit story</button></div><div id="phaseNav" class="phase-nav"></div><div id="story" class="story"></div><div id="storyEditorWrap" class="story-editor-wrap hidden"><textarea id="storyEditor"></textarea><button class="button primary" id="applyEdits">Use my edits</button></div></article><aside class="audio-card"><div class="cover"><span class="cover-label">PACESCENE</span><div class="cover-ring"><span>PS</span></div><h3 id="coverTitle"></h3><p id="coverMeta"></p></div><div class="audio-controls"><button class="main-play" id="playButton">▶</button><div class="secondary-controls"><button class="tiny-button" id="restartButton">↺ Restart</button><button class="tiny-button" id="pauseButton">Pause</button><button class="tiny-button" id="loopButton">Loop: off</button></div><div class="rate-control"><label>Voice pace</label><input type="range" id="rate" min="0.7" max="1.15" value="0.88" step="0.05"><span id="rateText">0.88×</span></div></div><div class="cue-box"><span>RESET CUE</span><strong id="cueDisplay"></strong></div><div class="session-actions"><button class="button primary wide" id="saveButton">Save session</button><button class="button wide" id="shareButton">Share / copy</button><button class="button subtle wide" id="alternateButton">Another version</button></div><div class="after-card"><label>After listening, how ready do you feel?</label><div><input type="range" id="afterReady" min="1" max="10" value="8"><strong><span id="afterValue">8</span>/10</strong></div><button class="button wide" id="logButton">Log readiness</button></div></aside></div></div></section>
-<section id="library" class="screen"><div class="library-shell"><div class="library-head"><div><div class="section-label">YOUR MENTAL REPS</div><h2>My sessions</h2><p>Saved until you remove them.</p></div><button class="button primary" data-screen="builder">+ New rehearsal</button></div><div id="libraryStats" class="library-stats"></div><div class="library-filter"><select id="contextFilter"><option value="all">All rehearsals</option><option value="race">Race / event</option><option value="session">Key session</option><option value="block">Training block</option></select></div><div id="sessionList" class="session-list"></div></div></section>
-</main><nav class="mobile-nav"><button data-screen="home"><span>⌂</span>Home</button><button data-screen="builder"><span>＋</span>Rehearse</button><button data-screen="library"><span>◎</span>Sessions</button></nav></div><div id="generationOverlay" class="generation-overlay"><div class="generation-card"><div class="generation-pulse"></div><h3>Building your rehearsal</h3><p>Turning your pacing, pressure points and cues into a realistic mental rep.</p></div></div><footer class="site-footer"><span>© 2026 PaceScene · Launch MVP</span><span><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span></footer><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff8f3">
+  <meta name="description" content="Calm, evidence-informed mental rehearsal for endurance athletes.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>PaceScene — Make performance feel familiar</title>
+</head>
+<body>
+  <div class="page-glow glow-one"></div>
+  <div class="page-glow glow-two"></div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand plain" data-screen="home" aria-label="PaceScene home">
+        <span class="brand-mark"><span>p</span><i>✦</i></span>
+        <span>PaceScene</span>
+      </button>
+      <div class="top-actions">
+        <button class="button ghost desktop-only" data-screen="library">My scenes</button>
+        <button class="button primary" data-screen="builder">Create a scene</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="screen active">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="sparkle">✦</span> calm performance rehearsal for endurance athletes</div>
+            <h1>Meet the moment <em>before</em> it happens.</h1>
+            <p class="hero-sub">
+              Build a vivid mental rehearsal of your race, key session, or training block — including the nerves,
+              fatigue and doubts — so your best response feels more familiar when it matters.
+            </p>
+
+            <div class="hero-actions">
+              <button class="button primary large" data-screen="builder">Create my scene <span>→</span></button>
+              <button class="button soft large" id="demoButton">Try a 10K scene</button>
+            </div>
+
+            <div class="trust-row">
+              <span>♡ realistic, not perfect</span>
+              <span>✦ personalized cues</span>
+              <span>☁ calm listening</span>
+            </div>
+
+            <p class="fine-print">
+              Evidence-informed visualization and performance reflection. No outcome promises.
+              Listen while resting — not while driving, cycling, swimming, or moving through technical terrain.
+            </p>
+          </div>
+
+          <div class="scene-preview" aria-label="PaceScene sample">
+            <div class="preview-orbit orbit-a"></div>
+            <div class="preview-orbit orbit-b"></div>
+            <div class="preview-card">
+              <div class="preview-top">
+                <span class="mini-pill">YOUR SCENE</span>
+                <span>5 min · calm</span>
+              </div>
+              <div class="preview-art">
+                <div class="sun"></div>
+                <div class="hill hill-a"></div>
+                <div class="hill hill-b"></div>
+                <div class="path"></div>
+                <span class="floating-star star-a">✦</span>
+                <span class="floating-star star-b">✦</span>
+              </div>
+              <p class="preview-kicker">10K · PRESSURE → RESET</p>
+              <h3>The effort rises. You know what to do.</h3>
+              <p>
+                Your shoulders tighten and the watch starts to feel loud.
+                You notice it. One long exhale. Loose hands. Eyes forward.
+                Next 200.
+              </p>
+              <div class="waveform" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <button class="round-play" id="heroPlay" aria-label="Play calm sample">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="science-strip">
+          <div class="science-copy">
+            <div class="section-label">WHY IT FEELS DIFFERENT</div>
+            <h2>Positive mindset, grounded in the performance you actually have to execute.</h2>
+          </div>
+          <div class="science-grid">
+            <article>
+              <span class="science-icon">◎</span>
+              <h3>Make it embodied</h3>
+              <p>Rehearse body sensations, environment, timing and emotion — not just a highlight reel.</p>
+            </article>
+            <article>
+              <span class="science-icon">↺</span>
+              <h3>Practice the reset</h3>
+              <p>Meet the feared moment, regulate, then return attention to the next useful action.</p>
+            </article>
+            <article>
+              <span class="science-icon">if</span>
+              <h3>Link cue to action</h3>
+              <p>Use a simple if–then plan so pressure becomes a prompt for your trained response.</p>
+            </article>
+            <article>
+              <span class="science-icon">✦</span>
+              <h3>Build believable belief</h3>
+              <p>Confidence grows from evidence, controllable actions and a response you recognize.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="mode-section">
+          <div class="section-label">THREE WAYS TO REHEARSE</div>
+          <h2>One athlete. Different moments.</h2>
+          <div class="mode-grid">
+            <article class="mode-card blush">
+              <span>01</span><div class="mode-emoji">🏁</div>
+              <h3>Race / event</h3>
+              <p>Pacing, pressure, the decisive section, your reset and a committed finish.</p>
+            </article>
+            <article class="mode-card lavender">
+              <span>02</span><div class="mode-emoji">☁</div>
+              <h3>Key session</h3>
+              <p>Warm-up uncertainty, useful work, fatigue, adjustment and finishing the session intelligently.</p>
+            </article>
+            <article class="mode-card mint">
+              <span>03</span><div class="mode-emoji">🌱</div>
+              <h3>Training block</h3>
+              <p>Ordinary days, overload, a hard week, recovery, adaptation and arriving ready.</p>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section id="builder" class="screen">
+        <div class="builder-shell">
+          <div class="builder-head">
+            <div>
+              <div class="section-label">CREATE YOUR SCENE</div>
+              <h2 id="builderTitle">Where are we going?</h2>
+            </div>
+            <div class="progress-copy"><span id="stepCopy">1 / 5</span></div>
+          </div>
+          <div class="progress-track"><div id="progressFill"></div></div>
+
+          <div class="builder-card">
+            <div class="step active" data-step="1">
+              <div class="step-badge">01 · THE SETTING</div>
+              <h3>Set the scene.</h3>
+              <p class="lead">Only give PaceScene details that are true. Specificity helps; invented details break immersion.</p>
+
+              <div class="context-choice-grid">
+                <button class="context-choice active" data-context="race"><span>🏁</span><b>Race / event</b><small>Competition day</small></button>
+                <button class="context-choice" data-context="session"><span>⚡</span><b>Key session</b><small>One important workout</small></button>
+                <button class="context-choice" data-context="block"><span>🌱</span><b>Training block</b><small>Several weeks</small></button>
+              </div>
+
+              <div class="two-col">
+                <div class="field"><label for="name">First name <span>(optional)</span></label><input id="name" placeholder="Maya"></div>
+                <div class="field"><label for="sport">Endurance sport</label>
+                  <select id="sport">
+                    <option>Running</option><option>Trail / Ultra Running</option><option>Track & Field - Endurance</option>
+                    <option>Road Cycling</option><option>Mountain Biking</option><option>Track Cycling - Endurance</option>
+                    <option>Swimming</option><option>Open Water Swimming</option><option>Triathlon</option><option>Duathlon</option>
+                    <option>Rowing</option><option>Cross-country Skiing</option><option>Speed Skating</option>
+                    <option>Endurance Canoe / Kayak</option><option>HYROX / Hybrid Endurance</option>
+                    <option>Adventure Racing</option><option>Other endurance sport</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="two-col">
+                <div class="field"><label for="event" id="eventLabel">Race / event</label><input id="event" placeholder="City 10K"></div>
+                <div class="field"><label for="distance" id="distanceLabel">Distance</label><input id="distance" placeholder="10 km"></div>
+              </div>
+              <div class="field"><label for="when" id="whenLabel">When is it?</label><input id="when" placeholder="Saturday morning, in two weeks…"></div>
+              <div class="field"><label for="course" id="courseLabel">What do you know about the environment?</label><textarea id="course" placeholder="Cool morning, crowded start, flat roads, small rise near 7 km. Only include details you actually know."></textarea></div>
+            </div>
+
+            <div class="step" data-step="2">
+              <div class="step-badge">02 · GOOD EXECUTION</div>
+              <h3>What does your best performance actually <em>do</em>?</h3>
+              <p class="lead">We can hold an outcome lightly, but the rehearsal is built around controllable actions.</p>
+
+              <div class="field"><label for="goal" id="goalLabel">If this goes really well, what are you doing?</label>
+                <textarea id="goal" placeholder="I stay patient for the first 3 km, keep my rhythm through the middle, then race the final 2 km with courage."></textarea>
+              </div>
+              <div class="two-col">
+                <div class="field"><label for="target" id="targetLabel">Outcome you care about <span>(optional)</span></label><input id="target" placeholder="Sub-40, PB, finish strong…"></div>
+                <div class="field"><label for="pace">Useful execution cue <span>(optional)</span></label><input id="pace" placeholder="Around 4:00/km · smooth power · 30 spm"></div>
+              </div>
+              <div class="field"><label for="decisive">Where will good decision-making matter most?</label>
+                <textarea id="decisive" placeholder="At 8 km I stop protecting the result and start racing the people ahead."></textarea>
+              </div>
+              <div class="field highlight-field"><label for="identityCue">Finish this sentence: “The version of me I want to rehearse is…”</label>
+                <input id="identityCue" placeholder="patient early, brave late, calm when it gets noisy">
+                <small>This is identity rehearsal, not a prediction.</small>
+              </div>
+            </div>
+
+            <div class="step" data-step="3">
+              <div class="step-badge">03 · THE PRESSURE SIGNATURE</div>
+              <h3>What gets noisy?</h3>
+              <p class="lead">A useful rehearsal includes the moment you would rather avoid — without turning discomfort into danger or panic into a verdict.</p>
+
+              <div class="field"><label for="fear">What are you most worried might happen?</label>
+                <textarea id="fear" placeholder="I feel heavy halfway, the pace slips, and I decide the goal is gone."></textarea>
+              </div>
+              <div class="two-col">
+                <div class="field"><label for="pressure">What do you notice first in your body?</label>
+                  <textarea id="pressure" placeholder="Shoulders tighten, breathing feels urgent, hands tense."></textarea>
+                </div>
+                <div class="field"><label for="thoughtTrap">What does your mind tend to say?</label>
+                  <textarea id="thoughtTrap" placeholder="This is too hard. You’ve messed it up. Back off."></textarea>
+                </div>
+              </div>
+              <div class="safety-note">
+                <span>♡</span>
+                <p>PaceScene rehearses expected effort and emotion. It should never coach you to ignore injury, illness, dangerous symptoms or unsafe conditions.</p>
+              </div>
+            </div>
+
+            <div class="step" data-step="4">
+              <div class="step-badge">04 · YOUR RETURN PATH</div>
+              <h3>What brings you back?</h3>
+              <p class="lead">The aim is not to erase nerves. It is to make your response to them easy to recognize.</p>
+
+              <div class="two-col">
+                <div class="field"><label for="cue">Short reset phrase</label><input id="cue" placeholder="Long exhale. Tall posture. Next 200."></div>
+                <div class="field"><label for="anchor">Physical anchor</label><input id="anchor" placeholder="Loose hands. Tall chest. Quick light feet."></div>
+              </div>
+
+              <div class="field"><label for="ifThen">Your if–then plan</label>
+                <textarea id="ifThen" placeholder="If I notice myself staring at the watch and spiralling, then I take one long exhale, loosen my hands and focus only on the next 200 metres."></textarea>
+                <small>Best when the “then” is a safe, specific action — not “ignore pain.”</small>
+              </div>
+
+              <div class="field"><label for="evidence">What evidence from training can your confidence stand on?</label>
+                <textarea id="evidence" placeholder="I’ve finished hard reps after a rough start. My pace gets smoother when I stop forcing it."></textarea>
+              </div>
+
+              <div class="cue-preview">
+                <span>YOUR PERFORMANCE LOOP</span>
+                <div><b>Notice</b><i>→</i><b>Exhale</b><i>→</i><b>Anchor</b><i>→</i><b>Next action</b></div>
+              </div>
+            </div>
+
+            <div class="step" data-step="5">
+              <div class="step-badge">05 · THE FEELING</div>
+              <h3>How should your inner voice feel?</h3>
+              <p class="lead">Choose the emotional texture. PaceScene will keep the content realistic either way.</p>
+
+              <div class="choice-grid">
+                <button class="choice active" data-tone="calm"><span>☁</span><b>Calm confidence</b><small>Warm, steady, spacious.</small></button>
+                <button class="choice" data-tone="charged"><span>⚡</span><b>Quiet fire</b><small>Focused, brave, committed.</small></button>
+                <button class="choice" data-tone="flow"><span>〰</span><b>Flow</b><small>Loose, rhythmic, absorbed.</small></button>
+                <button class="choice" data-tone="resilient"><span>🌱</span><b>Resilient</b><small>Kind, sturdy, adaptable.</small></button>
+              </div>
+
+              <div class="two-col top-gap">
+                <div class="field"><label for="length">Session length</label>
+                  <select id="length"><option value="primer">2–3 min · primer</option><option value="full" selected>5–6 min · full scene</option><option value="deep">8–10 min · deep rehearsal</option></select>
+                </div>
+                <div class="field"><label for="perspective">Perspective</label>
+                  <select id="perspective"><option value="you" selected>Guided · “You…”</option><option value="i">First person · “I…”</option></select>
+                </div>
+              </div>
+
+              <div class="field"><label for="lockedFacts">Anything PaceScene must not invent or get wrong? <span>(optional)</span></label>
+                <textarea id="lockedFacts" placeholder="Do not promise sub-40. Do not invent a coach or family member at the finish."></textarea>
+              </div>
+
+              <div class="readiness">
+                <div class="readiness-head"><label for="beforeReady">How ready do you feel right now?</label><strong><span id="beforeValue">6</span>/10</strong></div>
+                <input type="range" id="beforeReady" min="1" max="10" value="6">
+              </div>
+            </div>
+
+            <div class="builder-actions">
+              <button class="button ghost" id="backButton">← Back</button>
+              <button class="button primary" id="nextButton">Continue →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="session" class="screen">
+        <div class="session-shell">
+          <div class="session-top">
+            <button class="button ghost" data-screen="builder">← Edit inputs</button>
+            <span class="tag" id="typeTag">RACE / EVENT · REHEARSAL</span>
+          </div>
+
+          <div class="session-grid">
+            <article class="script-card">
+              <div class="script-head">
+                <div>
+                  <div class="section-label" id="sessionSport"></div>
+                  <h2 id="sessionName"></h2>
+                  <p id="sessionGoal"></p>
+                </div>
+                <button class="button ghost" id="editButton">Edit script</button>
+              </div>
+
+              <div class="science-mini">
+                <span>◎ embodied scene</span><span>↺ pressure + reset</span><span>if cue → action</span><span>✦ evidence-based belief</span>
+              </div>
+
+              <div id="phaseNav" class="phase-nav"></div>
+              <div id="story" class="story"></div>
+              <div id="storyEditorWrap" class="story-editor-wrap hidden">
+                <textarea id="storyEditor"></textarea>
+                <button class="button primary" id="applyEdits">Use my edits</button>
+              </div>
+            </article>
+
+            <aside class="audio-card">
+              <div class="cover">
+                <div class="cover-top"><span>PACESCENE</span><i>✦</i></div>
+                <div class="cover-art"><div class="moon"></div><div class="cover-wave wave-1"></div><div class="cover-wave wave-2"></div></div>
+                <h3 id="coverTitle"></h3>
+                <p id="coverMeta"></p>
+              </div>
+
+              <div class="listen-intro">
+                <span>☁ CALM GUIDE</span>
+                <p>Settle first. Then rehearse the performance in real time.</p>
+              </div>
+
+              <div class="audio-controls">
+                <button class="main-play" id="playButton" aria-label="Play rehearsal">▶</button>
+                <div class="secondary-controls">
+                  <button class="tiny-button" id="restartButton">↺ Restart</button>
+                  <button class="tiny-button" id="pauseButton">Pause</button>
+                  <button class="tiny-button" id="loopButton">Loop: off</button>
+                </div>
+
+                <div class="voice-control">
+                  <label for="voiceSelect">Voice</label>
+                  <select id="voiceSelect"><option>Calm guide · best available</option></select>
+                </div>
+
+                <div class="rate-control">
+                  <label for="rate">Pace</label>
+                  <input type="range" id="rate" min="0.72" max="1.02" value="0.82" step="0.02">
+                  <span id="rateText">0.82×</span>
+                </div>
+              </div>
+
+              <div class="cue-stack">
+                <div class="cue-card cue-green"><span>RESET CUE</span><strong id="cueDisplay"></strong></div>
+                <div class="cue-card cue-lav"><span>IF → THEN</span><strong id="ifThenDisplay"></strong></div>
+                <div class="cue-card cue-peach"><span>IDENTITY</span><strong id="identityDisplay"></strong></div>
+              </div>
+
+              <div class="session-actions">
+                <button class="button primary wide" id="saveButton">Save this scene</button>
+                <button class="button soft wide" id="shareButton">Share / copy</button>
+                <button class="button ghost wide" id="alternateButton">Create another version</button>
+              </div>
+
+              <div class="after-card">
+                <label for="afterReady">After listening, how ready do you feel?</label>
+                <div><input type="range" id="afterReady" min="1" max="10" value="8"><strong><span id="afterValue">8</span>/10</strong></div>
+                <button class="button ghost wide" id="logButton">Log readiness</button>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="library" class="screen">
+        <div class="library-shell">
+          <div class="library-head">
+            <div><div class="section-label">YOUR MENTAL REPS</div><h2>My scenes</h2><p>Saved on this device until you delete them.</p></div>
+            <button class="button primary" data-screen="builder">+ New scene</button>
+          </div>
+          <div id="libraryStats" class="library-stats"></div>
+          <div class="library-filter"><select id="contextFilter"><option value="all">All scenes</option><option value="race">Race / event</option><option value="session">Key session</option><option value="block">Training block</option></select></div>
+          <div id="sessionList" class="session-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="mobile-nav">
+      <button data-screen="home"><span>⌂</span>Home</button>
+      <button data-screen="builder"><span>✦</span>Rehearse</button>
+      <button data-screen="library"><span>♡</span>Scenes</button>
+    </nav>
+  </div>
+
+  <div id="generationOverlay" class="generation-overlay" aria-live="polite">
+    <div class="generation-card">
+      <div class="breath-orb"><i>✦</i></div>
+      <h3>Building your scene</h3>
+      <p>Weaving your environment, pressure signature, reset plan and confidence evidence into one realistic rehearsal.</p>
+      <div class="generation-steps"><span>body</span><span>emotion</span><span>cue</span><span>action</span></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span>© 2026 PaceScene · Mental rehearsal for endurance sport</span>
+    <span><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

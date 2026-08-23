@@ -5,7 +5,7 @@ const ALLOWED_LENGTHS = new Set(["primer", "full", "deep"]);
 const ALLOWED_TONES = new Set(["calm", "charged", "flow", "resilient"]);
 const ALLOWED_PERSPECTIVES = new Set(["you", "i"]);
 
-function clean(value, max = 1500) {
+function clean(value, max = 1800) {
   if (typeof value !== "string") return "";
   return value.trim().slice(0, max);
 }
@@ -16,104 +16,132 @@ function sanitize(input = {}) {
     name: clean(input.name, 80),
     sport: clean(input.sport, 100),
     event: clean(input.event, 180),
-    distance: clean(input.distance, 100),
+    distance: clean(input.distance, 120),
     when: clean(input.when, 150),
-    goal: clean(input.goal),
-    target: clean(input.target, 250),
-    pace: clean(input.pace, 250),
     course: clean(input.course),
+    goal: clean(input.goal),
+    target: clean(input.target, 300),
+    pace: clean(input.pace, 300),
+    decisive: clean(input.decisive),
+    identityCue: clean(input.identityCue, 400),
     fear: clean(input.fear),
     pressure: clean(input.pressure),
-    cue: clean(input.cue, 250),
-    anchor: clean(input.anchor, 250),
-    startPhase: clean(input.startPhase),
-    settlePhase: clean(input.settlePhase),
-    decisivePhase: clean(input.decisivePhase),
-    finishPhase: clean(input.finishPhase),
+    thoughtTrap: clean(input.thoughtTrap),
+    cue: clean(input.cue, 300),
+    anchor: clean(input.anchor, 300),
+    ifThen: clean(input.ifThen, 700),
+    evidence: clean(input.evidence),
     tone: ALLOWED_TONES.has(input.tone) ? input.tone : "calm",
     length: ALLOWED_LENGTHS.has(input.length) ? input.length : "full",
     perspective: ALLOWED_PERSPECTIVES.has(input.perspective) ? input.perspective : "you",
-    lockedFacts: clean(input.lockedFacts),
+    lockedFacts: clean(input.lockedFacts)
   };
 }
 
-function wordTarget(length) {
-  if (length === "primer") return "450-650 words";
-  if (length === "deep") return "1300-1700 words";
-  return "800-1100 words";
+function phases(context) {
+  if (context === "session") return ["GROUND", "ARRIVE", "WARM UP", "MAIN WORK", "HARD PATCH", "RESET", "FINISH", "RECOVER"];
+  if (context === "block") return ["GROUND", "BEGIN", "BUILD", "ORDINARY DAYS", "HARD WEEK", "ADAPT", "SHARPEN", "ARRIVE"];
+  return ["GROUND", "ARRIVE", "START", "RHYTHM", "PRESSURE", "RESET", "COMMIT", "REMEMBER"];
 }
 
-function phaseGuide(context) {
-  if (context === "session") {
-    return ["ARRIVE", "WARM UP", "MAIN WORK", "HARD PATCH", "FINISH", "RECOVER"];
-  }
-  if (context === "block") {
-    return ["BEGIN", "BUILD", "SETTLE", "HARD WEEK", "ADAPT", "ARRIVE"];
-  }
-  return ["ARRIVE", "START", "SETTLE", "PRESSURE", "COMMIT", "FINISH"];
+function lengthGuide(length) {
+  if (length === "primer") return "500-700 words total";
+  if (length === "deep") return "1450-1850 words total";
+  return "850-1150 words total";
+}
+
+function toneGuide(tone) {
+  if (tone === "charged") return "quiet fire: energetic and brave, never shouty or aggressive";
+  if (tone === "flow") return "fluid and rhythmic: absorbed, light, economical";
+  if (tone === "resilient") return "warm resilience: sturdy, kind, adaptable after setbacks";
+  return "calm confidence: spacious, warm, steady, quietly assured";
 }
 
 function promptFor(d) {
+  const labels = phases(d.context);
   const perspective = d.perspective === "i"
-    ? "Write in first person present tense using ‘I / my’."
-    : "Write in guided second person present tense using ‘you / your’.";
+    ? "Write in first-person present tense using I / me / my."
+    : "Write in guided second-person present tense using you / your.";
 
   return `
-You are the writing engine for PaceScene, a mental-rehearsal product for endurance athletes.
+You are PaceScene's performance-rehearsal writer for endurance athletes.
 
-Create ONE vivid, realistic, psychologically credible rehearsal. It is not manifestation magic, therapy, or a prediction.
+Create one vivid, calm, psychologically credible mental rehearsal. The product may feel uplifting and future-oriented, but it must NOT present manifestation as magic, certainty, or a guarantee. The athlete is rehearsing attention, emotion, decisions and action patterns.
 
-NON-NEGOTIABLE RULES
-- Never guarantee a PB, win, podium, target time, body change, selection, health outcome, or training adaptation.
-- Never invent named people, exact weather, exact venue details, medical facts, family details, coach dialogue, equipment, course features, or personal history unless the athlete supplied them.
-- Treat the athlete's "lockedFacts" as hard constraints.
-- Do not tell an athlete to train through injury, illness, dangerous symptoms, or unsafe conditions.
-- If pain/injury is part of the input, normalize sensible adjustment and professional guidance, not grit-through-it behavior.
-- Include a difficult or imperfect moment and a believable recovery response.
-- Confidence should come from controllable behavior: pacing, technique, judgment, self-talk, attention, fueling/routine if supplied, recovery, and commitment.
-- Avoid mystical language such as “the universe”, “destined”, “manifested”, “guaranteed”, “inevitable”.
-- Avoid generic motivational filler. Use the athlete's exact cues and concrete endurance details where available.
-- Do not invent sensory details under strict uncertainty. Neutral phrases like “the sounds around you” are fine.
-- Keep language natural when read aloud. Short paragraphs. No bullet lists inside phase text.
-- ${perspective}
+DESIGN PRINCIPLES
+Use evidence-informed sport imagery principles:
+- Physical: include realistic body sensations relevant to the athlete's supplied facts.
+- Environment: use only environment details the athlete supplied. Never invent exact weather, venue, people or course features.
+- Task: rehearse the actual pacing, technique, decisions and controllable actions.
+- Timing: let the sequence feel close to real-time rather than like a motivational montage.
+- Emotion: include nerves, effort, doubt and relief without treating them as failure.
+- Perspective: obey the requested first- or second-person perspective.
+- Learning: rehearse the athlete's CURRENT response plan, cues and evidence, not an idealized superhuman version.
 
-CONTEXT-SPECIFIC RULES
-Race/event:
-- Rehearse pacing discipline, settling, the feared hard section, a decisive section, and finishing.
-- The result may come into view, but only after execution is rehearsed.
+PERFORMANCE PSYCHOLOGY PRINCIPLES
+- Include a realistic hard/imperfect moment.
+- Use a notice → regulate → anchor → next-action sequence.
+- Use the supplied reset phrase and physical anchor naturally.
+- Use the athlete's if–then plan as a cue-response link. Do NOT convert it into "ignore pain" or "push through warning signs."
+- Self-talk should be short, believable and instructional or motivational in a grounded way.
+- Confidence should be tied to supplied training evidence and repeatable actions.
+- The identity cue can be uplifting, but frame it as a rehearsed way of responding, not destiny.
+- Outcome targets can matter, but should sit in the background until execution is established.
+- If symptoms could indicate injury, illness or danger, explicitly preserve the option to adjust, stop or seek appropriate help.
 
-Key session:
-- Treat the workout as training, not a referendum on fitness.
-- Rehearse warm-up, useful main work, fatigue/frustration, intelligent adjustment, and recovery.
-- Do not glorify completing a session at all costs.
-
-Training block:
-- Rehearse weeks rather than one cinematic day.
-- Include ordinary sessions, accumulated fatigue, a disappointing workout or difficult week, recovery/adjustment, gradual adaptation, and arriving ready.
-- Do not portray every week as improving linearly.
+NON-NEGOTIABLE SAFETY / REALISM
+- Never guarantee a PB, win, podium, target time, selection, body change, adaptation or health outcome.
+- Never invent named people, coach dialogue, family, medical history, nutrition/fueling plans, equipment, course details, prior results or exact conditions unless supplied.
+- Treat lockedFacts as hard constraints.
+- Never tell the athlete to override unsafe conditions or concerning pain.
+- Do not use pseudo-neuroscience phrases such as "rewire your brain instantly", "your subconscious guarantees this", or "your body already knows the exact result".
+- Avoid generic filler, hype, mystical language and clichés.
+- Do not say "you are unstoppable."
+- Do not overuse breath cues. One grounding breath sequence at the beginning and brief reset breaths later are enough.
+- Make the narration pleasant to hear aloud: short paragraphs, clean sentences, natural pauses.
 
 TONE
-${d.tone}
+${toneGuide(d.tone)}
+
+PERSPECTIVE
+${perspective}
 
 TARGET LENGTH
-${wordTarget(d.length)}
+${lengthGuide(d.length)}
 
-REQUIRED PHASES, IN THIS ORDER
-${phaseGuide(d.context).join(", ")}
+REQUIRED PHASES — EXACTLY THIS ORDER
+${labels.join(", ")}
+
+CONTEXT NOTES
+Race/event:
+- Ground before the start.
+- Rehearse patient opening, settling, rising effort, feared moment, reset, decisive section and finish/remember.
+- Do not make the finish a guaranteed target outcome.
+
+Key session:
+- Ground before training.
+- Rehearse warm-up uncertainty, useful main work, a hard patch, intelligent reset/adjustment, finish and recovery.
+- Training is not a referendum on fitness. Useful adjustment is allowed.
+
+Training block:
+- Ground into the weeks ahead.
+- Rehearse ordinary days, consistency, overload, a difficult week or disappointing session, recovery/adjustment, adaptation and arriving ready.
+- Do not portray linear progress or perfect adherence.
 
 ATHLETE INPUT
 ${JSON.stringify(d, null, 2)}
 
-Return ONLY valid JSON with this exact shape:
+OUTPUT
+Return ONLY valid JSON:
 {
-  "title": "short human title",
-  "subtitle": "one sentence describing the rehearsal",
+  "title": "short, warm title",
+  "subtitle": "one grounded sentence about what this scene rehearses",
   "sections": [
-    {"label": "PHASE LABEL", "text": "narration text"}
+    {"label": "PHASE", "text": "spoken narration"}
   ]
 }
 
-The sections array must contain exactly the required phases above, in order. Do not include markdown fences.
+The sections array must contain exactly ${labels.length} sections matching the required phase labels and order. No markdown fences.
 `.trim();
 }
 
@@ -135,46 +163,46 @@ export default async (request) => {
     const data = sanitize(raw);
 
     if (!data.sport || !data.event || !data.goal) {
-      return Response.json(
-        { error: "Sport, scenario and success description are required." },
-        { status: 400 }
-      );
+      return Response.json({ error: "Sport, scene and execution description are required." }, { status: 400 });
     }
 
+    const expected = phases(data.context);
     const client = new OpenAI();
+
     const completion = await client.chat.completions.create({
       model: Netlify.env.get("OPENAI_MODEL") || "gpt-4o-mini",
-      messages: [{ role: "user", content: promptFor(data) }],
-      max_tokens: data.length === "deep" ? 3500 : data.length === "primer" ? 1600 : 2600,
-      temperature: 0.7
+      messages: [
+        {
+          role: "system",
+          content: "You write calm, realistic, evidence-informed sports mental rehearsals. You never guarantee outcomes or invent athlete facts."
+        },
+        { role: "user", content: promptFor(data) }
+      ],
+      max_tokens: data.length === "deep" ? 4200 : data.length === "primer" ? 1900 : 3000,
+      temperature: 0.72,
+      response_format: { type: "json_object" }
     });
 
     const parsed = parseJson(completion.choices?.[0]?.message?.content || "");
-    const expected = phaseGuide(data.context);
 
     if (!Array.isArray(parsed.sections) || parsed.sections.length !== expected.length) {
-      throw new Error("Model returned an invalid phase structure.");
+      throw new Error("Invalid phase structure.");
     }
 
     const sections = parsed.sections.map((section, index) => ({
       label: expected[index],
-      text: clean(section?.text, 6000)
+      text: clean(section?.text, 6500)
     }));
 
-    if (sections.some(s => !s.text)) {
-      throw new Error("Model returned an empty phase.");
-    }
+    if (sections.some(s => !s.text)) throw new Error("Empty phase.");
 
     return Response.json({
-      title: clean(parsed.title, 140) || data.event,
-      subtitle: clean(parsed.subtitle, 260) || data.goal,
+      title: clean(parsed.title, 150) || data.event,
+      subtitle: clean(parsed.subtitle, 320) || data.goal,
       sections,
       model: Netlify.env.get("OPENAI_MODEL") || "gpt-4o-mini"
-    }, {
-      headers: {
-        "Cache-Control": "no-store"
-      }
-    });
+    }, { headers: { "Cache-Control": "no-store" } });
+
   } catch (error) {
     console.error("PaceScene generation error:", error);
     return Response.json(
@@ -184,6 +212,4 @@ export default async (request) => {
   }
 };
 
-export const config = {
-  path: "/api/generate"
-};
+export const config = { path: "/api/generate" };
