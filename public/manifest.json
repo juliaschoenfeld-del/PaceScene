@@ -1,0 +1,17 @@
+{
+  "name": "PaceScene — Mental Rehearsal for Endurance Athletes",
+  "short_name": "PaceScene",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#07100c",
+  "theme_color": "#07100c",
+  "description": "Personalized mental rehearsal for races, key sessions and endurance training blocks.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
