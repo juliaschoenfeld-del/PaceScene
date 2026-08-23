@@ -7,7 +7,7 @@ export default async () => {
   let html = await response.text();
   html = html
     .replace('</head>', '  <link rel="stylesheet" href="/v31.css">\n</head>')
-    .replace('</body>', '  <script src="/v31.js"></script>\n</body>');
+    .replace('</body>', '  <script src="/v31.js"></script>\n  <script src="/voice-v4.js"></script>\n</body>');
 
   return new Response(html, {
     headers: {
